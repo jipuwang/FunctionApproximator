@@ -119,8 +119,26 @@ int main() {
     vector<int> terms;
     vector<double> coeff;
     parser(f, terms, coeff);
-    for (auto i = 0; i < int(terms.size()); ++i) {
+    for (int i = 0; i < int(terms.size()); ++i) {
         cout << coeff[i] << ' ' << terms[i] << endl;
+    }
+
+    // aAll, bAll of size mesh intervals are accumulated 0th and 1st moments.
+    int meshPts = 40;
+    vector<double> aAll(meshPts, 0.0);
+    vector<double> bAll(meshPts, 0.0);
+    vector<double> aCurrent(meshPts, 0.0);
+    vector<double> aCurrent(meshPts, 0.0);
+
+    double lb = 0.0;
+    double ub = 10.0;
+
+    for (int iTerm = 0; iTerm < int(terms.size()); iTerm++) {
+        linearizeCurrent(terms[iTerm], lb, ub, meshPts, aCurrent, bCurrent);
+        for (int iMehs = 0; iMesh < meshPts; iMesh++) {
+            aAll(iMesh) += aCurrent(iMesh) * coeff[iTerm];
+            bAll(iMesh) += bCurrent(iMesh) * coeff[iTerm];
+        }
     }
     return 0;
 }
