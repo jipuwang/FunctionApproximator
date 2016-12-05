@@ -7,11 +7,12 @@
 #include <map>
 #include <sstream>
 #include <string>
-#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <vector>
+
+#include "linearizer.hpp"
+
 using namespace std;
 
 string print_term(const int &index) {
@@ -168,10 +169,10 @@ int main() {
     double ub = 10.0;
 
     for (int iTerm = 0; iTerm < int(terms.size()); iTerm++) {
-        linearizeCurrent(terms[iTerm], lb, ub, meshPts, aCurrent, bCurrent);
+        //linearizeCurrent(terms[iTerm], lb, ub, meshPts, aCurrent, bCurrent);
         for (int iMesh = 0; iMesh < meshPts; iMesh++) {
-            aAll(iMesh) += aCurrent(iMesh) * coeff[iTerm];
-            bAll(iMesh) += bCurrent(iMesh) * coeff[iTerm];
+            aAll[iMesh] += aCurrent[iMesh] * coeff[iTerm];
+            bAll[iMesh] += bCurrent[iMesh] * coeff[iTerm];
         }
     }
     return 0;
