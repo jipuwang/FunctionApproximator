@@ -15,6 +15,16 @@
 
 using namespace std;
 
+void output_vector_to_file(vector<double> vec_write, const string &filename) {
+	ofstream myfile;
+	myfile.open(filename.c_str());
+	for(auto i = 0; i < int(vec_write.size()) - 1; ++i) {
+		myfile << vec_write[i] << ',';
+	}
+	myfile << vec_write[int(vec_write.size()) - 1] << endl;
+	return;
+}
+
 int main() {
     string user_input = "f(x)=-1.3*Ln[x]+5+3.5*x^2-2.6*Exp[x]-35,Range=-1.2:3.5,Mesh=100";
     
