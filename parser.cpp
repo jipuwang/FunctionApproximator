@@ -10,8 +10,8 @@
 #include <unordered_set>
 #include <vector>
 
-#include "parser.hpp"
 #include "linearizer.hpp"
+#include "parser.hpp"
 
 using namespace std;
 
@@ -114,23 +114,21 @@ void parser(string str, vector<int> &terms, vector<double> &coeff) {
     return;
 }
 
-vector<double> Range_vec(const string &range)
-{
-	vector<double> range_vec;
-	size_t pos = range.find("=");
-	string useful = range.substr(pos + 1);
-	//cout << useful << endl;
-	double lower_bound = stod(useful, &pos);
-	//cout << lower_bound << endl;
-	double upper_bound = stod(useful.substr(pos + 1));
-	//cout << upper_bound << endl;
-	range_vec.push_back(lower_bound);
-	range_vec.push_back(upper_bound);
-	return range_vec;
+vector<double> Range_vec(const string &range) {
+    vector<double> range_vec;
+    size_t pos = range.find("=");
+    string useful = range.substr(pos + 1);
+    // cout << useful << endl;
+    double lower_bound = stod(useful, &pos);
+    // cout << lower_bound << endl;
+    double upper_bound = stod(useful.substr(pos + 1));
+    // cout << upper_bound << endl;
+    range_vec.push_back(lower_bound);
+    range_vec.push_back(upper_bound);
+    return range_vec;
 }
 
-int get_Mesh(const string &mesh)
-{
-	size_t pos = mesh.find("=");
-	return stod(mesh.substr(pos + 1));
+int get_Mesh(const string &mesh) {
+    size_t pos = mesh.find("=");
+    return stod(mesh.substr(pos + 1));
 }
