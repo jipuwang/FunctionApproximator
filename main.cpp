@@ -23,14 +23,26 @@ void output_vector_to_file(vector<double> vec_write, ofstream &myfile) {
     return;
 }
 
+void output_vector_to_file_term(vector<elementaryFunctionLib> vec_write, ofstream &myfile) {
+    for (auto i = 0; i < int(vec_write.size()) - 1; ++i) {
+        myfile << vec_write[i] << ',';
+    }
+    myfile << vec_write[int(vec_write.size()) - 1] << endl;
+    return;
+}
+
 int main() {
-    string user_input =
+	ifstream infile;
+    infile.open("intest.txt");
+    string user_input
         //"f(x)=-1.3*Ln[x]+5+3.5*x^2-2.6*Exp[x]-35,Range=0.0:10.0,Mesh=20"
         //"f(x)=Exp[x],Range=0.0:10.0,Mesh=20"
         //"f(x)=x,Range=0.0:10.0,Mesh=20"
         //"f(x)=x^2,Range=0.0:10.0,Mesh=20"
-        "f(x)=Sin(x),Range=0.0:10.0,Mesh=20"
+        //"f(x)=Sin(x),Range=0.0:10.0,Mesh=20"
         ;
+    getline(infile, user_input);
+    cout << user_input << endl;
 
     size_t pos = user_input.find(",");
     string f = user_input.substr(0, int(pos));  // first string, function
@@ -61,7 +73,7 @@ int main() {
 
     double lb = range_vec[0];
     double ub = range_vec[1];
-
+    
     for (int iTerm = 0; iTerm < int(terms.size()); iTerm++) {
         linearizeCurrent(terms[iTerm], lb, ub, meshPts, aCurrent, bCurrent);
         for (int iMesh = 0; iMesh < meshPts; iMesh++) {
@@ -70,6 +82,7 @@ int main() {
         }
     }
     
+    /*
     // Output aAll & bAll for debugging purposes
     std::cout << "first moments of the linearization" << std::endl;
     for(auto &i:aAll) {
@@ -80,6 +93,7 @@ int main() {
     for(auto &i:bAll) {
         std::cout << i << std::endl;
     }
+    */
    
     // Output test.txt for use in a python plotter script
     ofstream myfile;
@@ -87,7 +101,10 @@ int main() {
     myfile << user_input << endl;
     output_vector_to_file(bAll, myfile);
     output_vector_to_file(aAll, myfile);
+    output_vector_to_file(coeff, myfile);
+    output_vector_to_file_term(terms, myfile);
     myfile.close();
+    infile.close();
 
     return 0;
 }
