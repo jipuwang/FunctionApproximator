@@ -10,7 +10,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include "parser.h"
+
+#include "parser.hpp"
 #include "linearizer.hpp"
 
 using namespace std;
