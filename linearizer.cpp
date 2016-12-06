@@ -1,14 +1,16 @@
 #include "linearizer.hpp"
 #include <vector>
+#include "tgmath.h"
 #include "utils.hpp"
 
 void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
                       double ub, int meshPts, std::vector<double> aCurrent,
                       std::vector<double> bCurrent) {
+    double Z=ub-lb;
     double delta = Z / meshPts;
 
-    vector<double> F_j(meshPts);
-    vector<double> F_j_hat(meshPts);
+    std::vector<double> F_j(meshPts);
+    std::vector<double> F_j_hat(meshPts);
 
     // You can set up X_j=linspace(lb,ub,meshPts+1) to avoid Xinit, Xend
     double Xinit;
@@ -39,16 +41,16 @@ void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
             for (int j = 0; j < meshPts; j++) {
                 Xinit = j * delta;
                 Xend = (j + 1) * delta;
-                F_j(j) = (exp(Xend) - exp(Xinit)) / delta;
-                F_j_hat(j) =
+                F_j[j] = (exp(Xend) - exp(Xinit)) / delta;
+                F_j_hat[j] =
                     ((Xend - 1) * exp(Xend) - (Xinit - 1) * exp(Xinit)) / delta;
             }
             break;
     };
     bCurrent = F_j;
     for (int j = 0; j < meshPts; j++) {
-        aCurrent(j) =
-            (F_j_hat(j) - b(j) * (j + j + 1) * delta / 2) * 12 / delta / delta;
+        aCurrent[j] =
+            (F_j_hat[j] - bCurrent[j] * (j + j + 1) * delta / 2) * 12 / delta / delta;
     }
 
     return;
