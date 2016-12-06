@@ -30,50 +30,24 @@ def setup_y(zeroMom, firstMom, n, dx):
         Y[2*i + 1] = zeroMom[i] + 0.5 * dx * firstMom[i];
     return Y
 
+def string_to_floatAr(Str):
+	Str_array = Str.split(',');
+	Fl_array = np.zeros(len(Str_array));
+	for i in range(len(Str_array)):
+		Fl_array[i] = float(Str_array[i]);
+	return Fl_array;
+
 def main():
-    zeroMom = np.array([-0.367876244402644, 
-                        0.132123755597356,
-                        0.632123755597356,
-                        1.132123755597356,
-                        1.632123755597356,
-                        2.132123755597356,
-                        2.632123755597356,
-                        3.132123755597356,
-                        3.632123755597356,
-                        4.132123755597356,
-                        4.632123755597356,
-                        5.132123755597356,
-                        5.632123755597356,
-                        6.132123755597356,
-                        6.632123755597356,
-                        7.132123755597356,
-                        7.632123755597356,
-                        8.132123755597355,
-                        8.632123755597355,
-                        9.132123755597355]);
-    firstMom = np.array([-0.617876244402644, 
-                         -0.617876244402645, 
-                         -0.617876244402642,
-                         -0.617876244402642,
-                         -0.617876244402635,
-                         -0.617876244402635,
-                         -0.617876244402661,
-                         -0.617876244402661,
-                         -0.617876244402609,
-                         -0.617876244402609,
-                         -0.617876244402609,
-                         -0.617876244402714,
-                         -0.617876244402714,
-                         -0.617876244402714,
-                         -0.617876244402714,
-                         -0.617876244402714,
-                         -0.617876244402503,
-                         -0.617876244402503,
-                         -0.617876244402925,
-                         -0.617876244402925])/(-0.617876244402644);
+    f = open("stringlist.txt");
+    lines = f.readlines();
+    zeroMom = string_to_floatAr(lines[0]);
+    firstMom = string_to_floatAr(lines[1]);
+    #Coeff_Ar = string_to_floatAr(lines[2]);
+	#Poly_Ar = string_to_floatAr(lines[3]);
+	
     n = len(zeroMom)
     Tau = 10
-    Midpoints = set_midpoints(Tau, n)
+    Midpoints = set_midpoints(Tau, n);
     dx = Midpoints[1] - Midpoints[0]
     
     X = setup_x(n, dx)
