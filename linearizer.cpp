@@ -148,7 +148,7 @@ void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
     };
     bCurrent = F_j;
     for (int j = 0; j < meshPts; j++) {
-        aCurrent[j] = (F_j_hat[j] - bCurrent[j] * (j + j + 1) * delta / 2) *
+        aCurrent[j] = (F_j_hat[j] - bCurrent[j] * (X_j[j] + X_j[j + 1]) / 2) *
                       12 / delta / delta;
     }
 
