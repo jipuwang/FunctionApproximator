@@ -57,7 +57,8 @@ def main():
         plt.plot([X[2 * i], X[2 * i + 1]], [Y[2 * i], Y[2 * i + 1]], 'b-*')
     
     
-    plt.show()
+    #plt.show()
+    plt.savefig("plot.png", format="png", dpi=500);
     #X1 = np.array([1.0, 2.0]);
     #X2 = np.array([3.0, 4.0]);
     #plt.plot(X1, X1, 'b');
