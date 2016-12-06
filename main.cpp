@@ -15,9 +15,7 @@
 
 using namespace std;
 
-void output_vector_to_file(vector<double> vec_write, const string &filename) {
-	ofstream myfile;
-	myfile.open(filename.c_str());
+void output_vector_to_file(vector<double> vec_write, ofstream &myfile) {
 	for(auto i = 0; i < int(vec_write.size()) - 1; ++i) {
 		myfile << vec_write[i] << ',';
 	}
@@ -65,5 +63,12 @@ int main() {
             bAll[iMesh] += bCurrent[iMesh] * coeff[iTerm];
         }
     }
+    
+    ofstream myfile;
+	myfile.open("test.txt");
+	output_vector_to_file(aAll, myfile);
+	output_vector_to_file(bAll, myfile);
+	myfile.close();
+    
     return 0;
 }
