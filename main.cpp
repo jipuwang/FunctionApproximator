@@ -48,7 +48,7 @@ int main() {
     cout << "Mesh: " << Mesh_val << endl;
 
     // aAll, bAll of size mesh intervals are accumulated 0th and 1st moments.
-    int meshPts = 40;
+    int meshPts = 40404040;
     vector<double> aAll(meshPts, 0.0);
     vector<double> bAll(meshPts, 0.0);
     vector<double> aCurrent(meshPts, 0.0);
@@ -65,6 +65,14 @@ int main() {
         }
     }
 
+    for(auto &i:aAll) {
+        std::cout << i << std::endl;
+    }
+    for(auto &i:bAll) {
+        std::cout << i << std::endl;
+    }
+    //std::cout << bAll << std::endl;
+    
     ofstream myfile;
     myfile.open("test.txt");
     myfile << user_input << endl;
