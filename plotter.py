@@ -58,7 +58,7 @@ def main():
     
     
     #plt.show()
-    plt.savefig("plot.png", format="png", dpi=500);
+    plt.savefig("plot.pdf", format="pdf", dpi=500);
     #X1 = np.array([1.0, 2.0]);
     #X2 = np.array([3.0, 4.0]);
     #plt.plot(X1, X1, 'b');
