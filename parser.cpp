@@ -12,6 +12,7 @@
 
 #include "linearizer.hpp"
 #include "parser.hpp"
+#include "utils.hpp"
 
 using namespace std;
 
@@ -42,7 +43,7 @@ string print_term(const int &index) {
     return "wrong";
 }
 
-void parser(string str, vector<int> &terms, vector<double> &coeff) {
+void parser(string str, vector<elementaryFunctionLib> &terms, vector<double> &coeff) {
     string func = str.substr(5);
 
     while (func.size() != 0) {
@@ -72,30 +73,30 @@ void parser(string str, vector<int> &terms, vector<double> &coeff) {
         // get number
         if ((func.size() == 0) || (func[0] == '-') || (func[0] == '+')) {
             // it was only a constant
-            terms.push_back(0);
+            terms.push_back(CONST);
         } else {
             // get polynomial after the constant
             if (func[0] == 'x') {
                 if ((func.size() == 1) || (func[1] == '-') ||
                     (func[1] == '+')) {
-                    terms.push_back(1);
+                    terms.push_back(POLY1);
                 } else {
-                    terms.push_back(int(func[2] - '0'));
+                    terms.push_back(elementaryFunctionLib(int(func[2] - '0')));
                 }
             } else if (func[0] == 'S') {
-                terms.push_back(5);
+                terms.push_back(SINE);
             } else if (func[0] == 'C') {
-                terms.push_back(6);
+                terms.push_back(COSINE);
             } else if (func[0] == 'T') {
-                terms.push_back(7);
+                terms.push_back(TANGENT);
             } else if (func[0] == 'L') {
                 if (func[1] == 'n') {
-                    terms.push_back(8);
+                    terms.push_back(LN);
                 } else {
-                    terms.push_back(9);
+                    terms.push_back(LOG);
                 }
             } else if (func[0] == 'E') {
-                terms.push_back(10);
+                terms.push_back(EXP);
             } else {
                 cout << "wrong input" << endl;
             }

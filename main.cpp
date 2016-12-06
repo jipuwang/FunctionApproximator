@@ -11,6 +11,7 @@
 #include <vector>
 #include "parser.hpp"
 #include "linearizer.hpp"
+#include "utils.hpp"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ int main() {
 	string f = user_input.substr(0, int(pos));		//first string, function
 	cout << "Function: " << f << endl;
     
-    vector<int> terms;
+    vector<elementaryFunctionLib> terms;
     vector<double> coeff;
     parser(f, terms, coeff);
     for (int i = 0; i < int(terms.size()); ++i) {
