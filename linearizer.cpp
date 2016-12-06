@@ -5,6 +5,15 @@
 void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
                       double ub, int meshPts, std::vector<double> aCurrent,
                       std::vector<double> bCurrent) {
+    double delta = Z / meshPts;
+
+    vector<double> F_j(meshPts);
+    vector<double> F_j_hat(meshPts);
+
+    // You can set up X_j=linspace(lb,ub,meshPts+1) to avoid Xinit, Xend
+    double Xinit;
+    double Xend;
+
     switch (elementaryFunctionType) {
         case CONST:
             break;
@@ -27,33 +36,20 @@ void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
         case LOG:
             break;
         case EXP:
+            for (int j = 0; j < meshPts; j++) {
+                Xinit = j * delta;
+                Xend = (j + 1) * delta;
+                F_j(j) = (exp(Xend) - exp(Xinit)) / delta;
+                F_j_hat(j) =
+                    ((Xend - 1) * exp(Xend) - (Xinit - 1) * exp(Xinit)) / delta;
+            }
             break;
     };
-    /*  string print_term(const int &index) {
-      if (index == 0) {
-          return "";
-      } else if (index == 1) {
-          return "x";
-      } else if (index == 2) {
-          return "x^2";
-      } else if (index == 3) {
-          return "x^3";
-      } else if (index == 4) {
-          return "x^4";
-      } else if (index == 5) {
-          return "Sin(x)";
-      } else if (index == 6) {
-          return "Cos(x)";
-      } else if (index == 7) {
-          return "Tan(x)";
-      } else if (index == 8) {
-          return "Ln(x)";
-      } else if (index == 9) {
-          return "Log(x)";
-      } else if (index == 10) {
-          return "Exp(x)";
-      }
-      return "wrong";
-      */
+    bCurrent = F_j;
+    for (int j = 0; j < meshPts; j++) {
+        aCurrent(j) =
+            (F_j_hat(j) - b(j) * (j + j + 1) * delta / 2) * 12 / delta / delta;
+    }
+
     return;
 };
