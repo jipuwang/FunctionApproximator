@@ -21,7 +21,7 @@ void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
     double Xinit;
     double Xend;
 
-    int n=0;
+    int n = 0;
 
     switch (elementaryFunctionType) {
         case CONST:
@@ -114,12 +114,26 @@ void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
             for (int j = 0; j < meshPts; j++) {
                 Xinit = X_j[j];
                 Xend = X_j[j + 1];
+                F_j[j] =
+                    (Xinit - Xinit * log(Xinit) - Xend + Xend * log(Xend)) /
+                    delta;
+                F_j_hat[j] =
+                    (0.25 * (Xinit * Xinit - 2 * Xinit * Xinit * log(Xinit) -
+                             Xend * Xend + 2 * Xend * Xend * log(Xend))) /
+                    delta;
             }
             break;
-        case LOG:
+        case LOG:  // log10
             for (int j = 0; j < meshPts; j++) {
                 Xinit = X_j[j];
                 Xend = X_j[j + 1];
+                F_j[j] =
+                    (Xinit - Xinit * log10(Xinit) - Xend + Xend * log10(Xend)) /
+                    delta;
+                F_j_hat[j] =
+                    (0.25 * (Xinit * Xinit - 2 * Xinit * Xinit * log10(Xinit) -
+                             Xend * Xend + 2 * Xend * Xend * log10(Xend))) /
+                    delta;
             }
             break;
         case EXP:
