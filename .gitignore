@@ -3,3 +3,4 @@ exprtk
 *.exe
 test.txt
 plot.pdf
+.*
