@@ -81,6 +81,7 @@ int main() {
     // Output test.txt for use in a python plotter script
     ofstream myfile;
     myfile.open("test.txt");
+    myfile << user_input << endl;
     output_vector_to_file(aAll, myfile);
     output_vector_to_file(bAll, myfile);
     myfile.close();
