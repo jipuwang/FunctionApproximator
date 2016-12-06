@@ -8,6 +8,8 @@ Created on Sun Dec 04 11:15:47 2016
 import math
 import numpy as np
 import random
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 def set_midpoints(Tau, n):
