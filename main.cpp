@@ -25,7 +25,9 @@ void output_vector_to_file(vector<double> vec_write, ofstream &myfile) {
 
 int main() {
     string user_input =
-        "f(x)=-1.3*Ln[x]+5+3.5*x^2-2.6*Exp[x]-35,Range=-1.2:3.5,Mesh=100";
+        //"f(x)=-1.3*Ln[x]+5+3.5*x^2-2.6*Exp[x]-35,Range=0.0:10.0,Mesh=20";
+        //"f(x)=Exp[x],Range=0.0:10.0,Mesh=20";
+        "f(x)=x,Range=0.0:10.0,Mesh=20";
 
     size_t pos = user_input.find(",");
     string f = user_input.substr(0, int(pos));  // first string, function
@@ -48,14 +50,14 @@ int main() {
     cout << "Mesh: " << Mesh_val << endl;
 
     // aAll, bAll of size mesh intervals are accumulated 0th and 1st moments.
-    int meshPts = 40404040;
+    int meshPts = Mesh_val;
     vector<double> aAll(meshPts, 0.0);
     vector<double> bAll(meshPts, 0.0);
     vector<double> aCurrent(meshPts, 0.0);
     vector<double> bCurrent(meshPts, 0.0);
 
-    double lb = 0.0;
-    double ub = 10.0;
+    double lb = range_vec[0];
+    double ub = range_vec[1];
 
     for (int iTerm = 0; iTerm < int(terms.size()); iTerm++) {
         linearizeCurrent(terms[iTerm], lb, ub, meshPts, aCurrent, bCurrent);
@@ -64,15 +66,19 @@ int main() {
             bAll[iMesh] += bCurrent[iMesh] * coeff[iTerm];
         }
     }
-
+    
+    // Output aAll & bAll for debugging purposes
+    std::cout << "first moments of the linearization" << std::endl;
     for(auto &i:aAll) {
         std::cout << i << std::endl;
     }
+    std::cout << std::endl;
+    std::cout << "zeroth moments of the linearization" << std::endl;
     for(auto &i:bAll) {
         std::cout << i << std::endl;
     }
-    //std::cout << bAll << std::endl;
-    
+   
+    // Output test.txt for use in a python plotter script
     ofstream myfile;
     myfile.open("test.txt");
     output_vector_to_file(aAll, myfile);

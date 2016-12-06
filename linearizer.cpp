@@ -4,8 +4,8 @@
 #include "utils.hpp"
 
 void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
-                      double ub, int meshPts, std::vector<double> aCurrent,
-                      std::vector<double> bCurrent) {
+                      double ub, int meshPts, std::vector<double> &aCurrent,
+                      std::vector<double> &bCurrent) {
     double Z = ub - lb;
     double delta = Z / meshPts;
 
