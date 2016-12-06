@@ -62,16 +62,14 @@ def main():
     
     #plt.show()
     #add labels
-	ana_label = mpl.patches.Patch(color='red', label='Analytical Curve');
-	num_label = mpl.patches.Patch(color='blue', label='Approximated Curve');
-	plt.legend(handles=[ana_label, num_label]);
-	
-	plt.grid(True) #add grid
-	plt.xlabel("x");
-	plt.ylabel("f(x)");
-	plt.title(func_name)
-	
-	
+    ana_label = mpl.patches.Patch(color='red', label='Analytical Curve');
+    num_label = mpl.patches.Patch(color='blue', label='Approximated Curve');
+    plt.legend(handles=[ana_label, num_label]);
+    
+    plt.grid(True) #add grid
+    plt.xlabel("x");
+    plt.ylabel("f(x)");
+    plt.title(func_name);
     plt.savefig("plot.pdf", format="pdf", dpi=500);
     #X1 = np.array([1.0, 2.0]);
     #X2 = np.array([3.0, 4.0]);
