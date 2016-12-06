@@ -40,10 +40,11 @@ def string_to_floatAr(Str):
 	return Fl_array;
 
 def main():
-    f = open("stringlist.txt");
+    f = open("test.txt");
     lines = f.readlines();
-    zeroMom = string_to_floatAr(lines[0]);
-    firstMom = string_to_floatAr(lines[1]);
+    func_name = lines[0];
+    zeroMom = string_to_floatAr(lines[1]);
+    firstMom = string_to_floatAr(lines[2]);
     #Coeff_Ar = string_to_floatAr(lines[2]);
 	#Poly_Ar = string_to_floatAr(lines[3]);
 	
@@ -60,6 +61,17 @@ def main():
     
     
     #plt.show()
+    #add labels
+	ana_label = mpl.patches.Patch(color='red', label='Analytical Curve');
+	num_label = mpl.patches.Patch(color='blue', label='Approximated Curve');
+	plt.legend(handles=[ana_label, num_label]);
+	
+	plt.grid(True) #add grid
+	plt.xlabel("x");
+	plt.ylabel("f(x)");
+	plt.title(func_name)
+	
+	
     plt.savefig("plot.pdf", format="pdf", dpi=500);
     #X1 = np.array([1.0, 2.0]);
     #X2 = np.array([3.0, 4.0]);
