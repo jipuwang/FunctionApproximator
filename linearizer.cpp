@@ -15,7 +15,7 @@ void linearizeCurrent(elementaryFunctionLib elementaryFunctionType, double lb,
     // You can set up X_j=linspace(lb,ub,meshPts+1) to avoid Xinit, Xend
     std::vector<double> X_j(meshPts + 1);
     for (int j = 0; j < meshPts + 1; j++) {
-        X_j[j] = j * delta;
+        X_j[j] = lb + j * delta;
     }
 
     double Xinit;

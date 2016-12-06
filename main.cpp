@@ -25,11 +25,12 @@ void output_vector_to_file(vector<double> vec_write, ofstream &myfile) {
 
 int main() {
     string user_input =
-        //"f(x)=-1.3*Ln[x]+5+3.5*x^2-2.6*Exp[x]-35,Range=0.0:10.0,Mesh=20"
+        //"f(x)=-1.3*Ln[x]+5+3.5*x^2-2.6*Exp[x]-35,Range=1.2:3.5,Mesh=20"
         //"f(x)=Exp[x],Range=0.0:10.0,Mesh=20"
-        //"f(x)=x,Range=0.0:10.0,Mesh=20"
+        "f(x)=x,Range=2.0:10.0,Mesh=20"
         //"f(x)=x^2,Range=0.0:10.0,Mesh=20"
-        "f(x)=Sin(x),Range=0.0:10.0,Mesh=20"
+        //"f(x)=Sin(x),Range=0.0:10.0,Mesh=20"
+        //"f(x)=Sin(x),Range=0.0:10.0,Mesh=20"
         ;
 
     size_t pos = user_input.find(",");
