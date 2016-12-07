@@ -103,6 +103,7 @@ int main() {
     output_vector_to_file(aAll, myfile);
     output_vector_to_file(coeff, myfile);
     output_vector_to_file_term(terms, myfile);
+    output_vector_to_file(range_vec, myfile);
     myfile.close();
     infile.close();
 
